@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}:${{ env.TAG }} .
+          docker build -t ghcr.io/${{ github.repository }}:${{ env.TAG }} ./backend
 
       - name: Push Docker image
         run: |
