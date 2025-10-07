@@ -28,6 +28,9 @@ jobs:
       - name: Determine image tags
         id: vars
         run: |
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "REPO_NAME=${REPO_LOWER}" >> $GITHUB_ENV
+
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
           else
@@ -36,8 +39,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}:${{ env.TAG }} ./backend
+          docker build -t ghcr.io/${{ env.REPO_NAME }}:${{ env.TAG }} ./backend
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}:${{ env.TAG }}
+          docker push ghcr.io/${{ env.REPO_NAME }}:${{ env.TAG }}
