@@ -31,6 +31,8 @@ jobs:
           REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           echo "REPO_NAME=${REPO_LOWER}" >> $GITHUB_ENV
 
+          echo "debugging: ${GITHUB_REF}"
+
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
           else
