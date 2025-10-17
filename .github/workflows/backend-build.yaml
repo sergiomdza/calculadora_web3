@@ -27,7 +27,8 @@ jobs:
         working-directory: ./backend
         run: |
           python -m pip install -r requirements.txt
-      
+          pip install pytest
+                
       - name: Running Pytest
         working-directory: ./backend
         run: |
