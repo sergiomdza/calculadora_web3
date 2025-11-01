@@ -32,7 +32,7 @@ jobs:
       - name: Running Pytest
         working-directory: ./backend
         run: |
-          python -m pytest test_main.p
+          python -m pytest test_main.py
 
       - name: Run pytest and export report
         working-directory: ./backend
