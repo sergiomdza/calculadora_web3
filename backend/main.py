@@ -10,6 +10,7 @@ from loki_logger_handler.loki_logger_handler import LokiLoggerHandler
 # Set up logging
 logger = logging.getLogger()
 logging_data = os.getenv("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(level=logging.DEBUG)
 
 if logging_data == "DEBUG":
     logger.setLevel(logging.DEBUG)
