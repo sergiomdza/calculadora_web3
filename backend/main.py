@@ -1,8 +1,31 @@
 import datetime
+import logging
+import os
 from fastapi import FastAPI
 from pymongo import MongoClient
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
+from loki_logger_handler.loki_logger_handler import LokiLoggerHandler
+
+# Set up logging
+logger = logging.getLogger("custom_logger")
+logging_data = os.getenv("LOG_LEVEL", "INFO").upper()
+
+if logging_data == "DEBUG":
+    logger.setLevel(logging.DEBUG)
+elif logging_data == "INFO":
+    logger.setLevel(logging.INFO)
+
+# Create an instance of the custom handler
+custom_handler = LokiLoggerHandler(
+    url="http://loki:3100/loki/api/v1/push",
+    labels={"application": "FastApi"},
+    label_keys={},
+    timeout=10,
+)
+
+logger.addHandler(custom_handler)
+logger.info("Logger initialized")
 
 app = FastAPI()
 app.add_middleware(
@@ -38,6 +61,9 @@ def sumar(a: float, b: float):
         "b": b,
         "date": datetime.datetime.now(tz=datetime.timezone.utc),
     }
+
+    logger.info(f"Operación suma exitoso")
+    logger.debug(f"Operación suma: a={a}, b={b}, resultado={resultado}")
 
     collection_historial.insert_one(document)
     
@@ -80,6 +106,9 @@ def dividir(dividendo: float, divisor: float):
     }
 
     # collection_historial.insert_one(document)
+
+    logger.info(f"Operación dividir exitoso")
+    logger.debug(f"Operación dividir: dividendo={dividendo}, divisor={divisor}, resultado={resultado}")
 
     return {"a": dividendo, "b": divisor, "resultado": resultado}
 

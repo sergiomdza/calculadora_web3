@@ -9,3 +9,4 @@ fastapi==0.116.1
 httpx==0.28.1
 prometheus-fastapi-instrumentator==6.1.0
 uvicorn==0.35.0
+loki-logger-handler==1.1.2
