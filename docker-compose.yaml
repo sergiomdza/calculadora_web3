@@ -11,7 +11,8 @@ services:
       - mongo-network
 
   calculadora:
-    image: calculadora-fast-api:latest
+    image: ghcr.io/sergiomdza/calculadora_web3:latest
+    pull_policy: always
     volumes:
       - ./backend:/app
     ports:
