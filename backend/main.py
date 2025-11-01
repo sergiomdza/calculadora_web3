@@ -8,12 +8,12 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from loki_logger_handler.loki_logger_handler import LokiLoggerHandler
 
 # Set up logging
-logger = logging.getLogger("custom_logger")
+logger = logging.getLogger()
 logging_data = os.getenv("LOG_LEVEL", "INFO").upper()
 
 if logging_data == "DEBUG":
     logger.setLevel(logging.DEBUG)
-elif logging_data == "INFO":
+else:
     logger.setLevel(logging.INFO)
 
 # Create an instance of the custom handler
