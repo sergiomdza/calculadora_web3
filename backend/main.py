@@ -1,7 +1,6 @@
 import datetime
 import logging
-import os
-import sys
+import os, sys
 from fastapi import FastAPI
 from pymongo import MongoClient
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,10 +19,10 @@ else:
 # Create a console handler
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logger.level)
-""" formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+formatter = logging.Formatter(
+    "%(levelname)s: %(asctime)s - %(name)s - %(message)s"
 )
-console_handler.setFormatter(formatter) """
+console_handler.setFormatter(formatter)
 
 # Create an instance of the custom handler
 loki_handler = LokiLoggerHandler(
