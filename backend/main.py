@@ -20,10 +20,10 @@ else:
 # Create a console handler
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logger.level)
-formatter = logging.Formatter(
+""" formatter = logging.Formatter(
     "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
-console_handler.setFormatter(formatter)
+console_handler.setFormatter(formatter) """
 
 # Create an instance of the custom handler
 loki_handler = LokiLoggerHandler(
