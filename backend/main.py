@@ -100,9 +100,11 @@ def dividir(dividendo: float, divisor: float):
     """
 
     if divisor == 0:
+        logger.error("zero_division_error")
         return {"error": "No se puede dividir entre cero."}
     
     if divisor < 0:
+        logger.error("neg_number_division_error")
         return {"error": "No se puede dividir entre numeros negativos."}
     
     resultado = dividendo / divisor
