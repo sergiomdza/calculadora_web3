@@ -86,7 +86,7 @@ jobs:
             --users 500 \
             --spawn-rate 100 \
             --run-time 1m \
-            --exit-code-on-error \
+            --exit-code-on-error true \
             --fail-request-avg-response-time 1000
 
       - name: Push Docker image
