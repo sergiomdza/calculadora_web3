@@ -20,20 +20,6 @@ services:
     networks:
       - mongo-network
 
-  frontend:
-    image: frotend-react
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app #Copia los archivos del ./frontend a una nueva carpeta llamad /app
-      - /app/node_modules # Crea una nueva carpeta de node_modules; evita problemas
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    depends_on:
-      - calculadora
-    networks:
-      - mongo-network 
-
 networks:
   mongo-network:
     driver: bridge
