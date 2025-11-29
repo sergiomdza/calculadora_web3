@@ -16,7 +16,7 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - "8089:8000"
+      - "8088:8000"
     networks:
       - mongo-network
 

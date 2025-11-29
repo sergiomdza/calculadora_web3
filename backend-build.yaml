@@ -69,6 +69,25 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ghcr.io/${{ env.REPO_NAME }}:${{ env.TAG }} ./backend
+      
+      - name: Start App with Docker Compose
+        run: |
+          docker compose -p practicas up -d
+      
+      - name: Install Locust
+        run: |
+          python -m pip install locust
+      
+      - name: Run Locust tests
+        run: |
+          locust -f locustfile.py \
+            --headless \
+            --host=http://localhost:8088 \
+            --users 500 \
+            --spawn-rate 100 \
+            --run-time 1m \
+            --exit-code-on-error \
+            --fail-request-avg-response-time 1000
 
       - name: Push Docker image
         run: |
